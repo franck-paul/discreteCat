@@ -17,11 +17,14 @@ class behaviorDiscreteCat
 {
 	public static function templateBeforeBlock($core,$b,$attr)
 	{
-		if ($b == 'Entries' && !isset($attr['no_context']) && !isset($attr['category']))
-		{
-			$url_types = array('default','default-page','feed');
-			if (in_array($core->url->type,$url_types)) {
-				$attr['category'] = 'Photos ?not';
+		if ($core->blog->settings->discretecat->discretecat_active && ($core->blog->settings->discretecat->discretecat_cat != '')) {
+			// discreteCat active and a category to exclude
+			if ($b == 'Entries' && !isset($attr['no_context']) && !isset($attr['category']))
+			{
+				$url_types = array('default','default-page','feed');
+				if (in_array($core->url->type,$url_types)) {
+					$attr['category'] = $core->blog->settings->discretecat->discretecat_cat.' ?not';
+				}
 			}
 		}
 	}
