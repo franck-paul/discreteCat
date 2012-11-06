@@ -12,8 +12,8 @@
 if (!defined('DC_RC_PATH')) { return; }
 
 $this->registerModule(
-	/* Name */				__("Discrete category"),
-	/* Description*/		__("Exclude a category from Home and RSS/Atom feed"),
+	/* Name */			"Discrete category",
+	/* Description*/		"Exclude a category from Home and RSS/Atom feed",
 	/* Author */			"Franck Paul",
 	/* Version */			'0.2'
 );
