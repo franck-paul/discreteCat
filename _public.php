@@ -11,19 +11,21 @@
 # -- END LICENSE BLOCK -----------------------------------------
 if (!defined('DC_RC_PATH')) { return; }
 
-$core->addBehavior('templateBeforeBlock',array('behaviorDiscreteCat','templateBeforeBlock'));
+$core->addBehavior('coreBlogBeforeGetPosts',array('behaviorDiscreteCat','coreBlogBeforeGetPosts'));
 
 class behaviorDiscreteCat
 {
-	public static function templateBeforeBlock($core,$b,$attr)
+	public static function coreBlogBeforeGetPosts($params)
 	{
+		global $core, $_ctx;
+
 		if ($core->blog->settings->discretecat->discretecat_active && ($core->blog->settings->discretecat->discretecat_cat != '')) {
 			// discreteCat active and a category to exclude
-			if ($b == 'Entries' && !isset($attr['no_context']) && !isset($attr['category']))
+			if (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not']))
 			{
 				$url_types = array('default','default-page','feed');
 				if (in_array($core->url->type,$url_types)) {
-					$attr['category'] = $core->blog->settings->discretecat->discretecat_cat.' ?not';
+					$params['cat_url'] = $core->blog->settings->discretecat->discretecat_cat.' ?not';
 				}
 			}
 		}
