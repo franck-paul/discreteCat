@@ -58,7 +58,7 @@ try {
 
 <body>
 <?php
-echo '<h2>'.html::escapeHTML($core->blog->name).' &rsaquo; '.__('Discrete category').'</h2>';
+echo '<h2>'.html::escapeHTML($core->blog->name).' &rsaquo; <span class="page-title">'.__('Discrete category').'</span></h2>';
 
 if (!empty($_GET['upd'])) {
 	dcPage::message(__('Settings have been successfully updated.'));
