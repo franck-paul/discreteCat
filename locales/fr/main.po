@@ -21,3 +21,6 @@ msgstr "Catégorie discrète"
 
 msgid "Exclude a category from Home and RSS/Atom feed"
 msgstr "Exclut une catégorie de la page d'accueil et des flux RSS/Atom"
+
+msgid "This category will be excluded from home and it's RSS/Atom feeds only."
+msgstr "Cette catégorie sera exclue de la page d'accueil et de ses flux RSS/Atom seulement."
