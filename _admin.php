@@ -15,9 +15,9 @@ $_menu['Plugins']->addItem(__('Discrete category'),'plugin.php?p=discreteCat','i
 		preg_match('/plugin.php\?p=discreteCat(&.*)?$/',$_SERVER['REQUEST_URI']),
 		$core->auth->check('admin',$core->blog->id));
 
-$core->addBehavior('adminDashboardFavs','catOrderDashboardFavs');
+$core->addBehavior('adminDashboardFavs','discreteCatDashboardFavs');
 
-function catOrderDashboardFavs($core,$favs)
+function discreteCatDashboardFavs($core,$favs)
 {
 	$favs['discreteCat'] = new ArrayObject(array('discreteCat','Discrete category','plugin.php?p=discreteCat',
 		'index.php?pf=discreteCat/icon.png','index.php?pf=discreteCat/icon-big.png',

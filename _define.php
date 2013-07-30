@@ -15,6 +15,6 @@ $this->registerModule(
 	/* Name */			"Discrete category",
 	/* Description*/		"Exclude a category from Home and RSS/Atom feed",
 	/* Author */			"Franck Paul",
-	/* Version */			'0.4'
+	/* Version */			'0.4.1'
 );
 ?>
