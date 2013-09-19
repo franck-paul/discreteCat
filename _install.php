@@ -26,7 +26,7 @@ try
 	$core->blog->settings->discretecat->put('discretecat_cat','','string','Category to exclude',false,true);
 
 	$core->setVersion('discreteCat',$new_version);
-	
+
 	return true;
 }
 catch (Exception $e)

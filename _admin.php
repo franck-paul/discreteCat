@@ -12,7 +12,7 @@
 
 if (!defined('DC_CONTEXT_ADMIN')) { return; }
 
-$_menu['Plugins']->addItem(__('Discrete category'),'plugin.php?p=discreteCat','index.php?pf=discreteCat/icon.png',
+$_menu['Blog']->addItem(__('Discrete category'),'plugin.php?p=discreteCat','index.php?pf=discreteCat/icon.png',
 		preg_match('/plugin.php\?p=discreteCat(&.*)?$/',$_SERVER['REQUEST_URI']),
 		$core->auth->check('admin',$core->blog->id));
 
