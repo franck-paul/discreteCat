@@ -73,8 +73,7 @@ if (!empty($_GET['upd'])) {
 echo
 '<form action="'.$p_url.'" method="post">'.
 '<p><label for="dc_active" class="classic">'.__('Activate discrete categorie on this blog').'</label> '.
-form::checkbox('dc_active',1,$dc_active).'</p>'.
-'</fieldset>';
+form::checkbox('dc_active',1,$dc_active).'</p>';
 
 $rs = $core->blog->getCategories(array('post_type'=>'post'));
 if ($rs->isEmpty()) {
