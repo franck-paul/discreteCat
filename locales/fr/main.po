@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 discreteCat module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 15:58+0200\n"
+"POT-Creation-Date: 2013-09-24 13:30+0200\n"
 "PO-Revision-Date: 2012-11-05 16:54+0100\n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>\n"
 "Language-Team: \n"
@@ -19,6 +19,9 @@ msgstr ""
 msgid "Discrete category"
 msgstr "Catégorie discrète"
 
+msgid "Exclude a category from Home and RSS/Atom feed"
+msgstr "Exclut une catégorie de la page d'accueil et des flux RSS/Atom"
+
 msgid "Activate discrete categorie on this blog"
 msgstr "Activer la catégorie discrète sur ce blog"
 
@@ -27,6 +30,3 @@ msgstr "Aucune catégorie pour l'instant."
 
 msgid "This category will be excluded from home and it's RSS/Atom feeds only."
 msgstr "Cette catégorie sera exclue de la page d'accueil et de ses flux RSS/Atom seulement."
-
-msgid "Exclude a category from Home and RSS/Atom feed"
-msgstr "Exclut une catégorie de la page d'accueil et des flux RSS/Atom"
