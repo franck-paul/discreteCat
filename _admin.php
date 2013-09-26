@@ -27,4 +27,3 @@ function discreteCatDashboardFavs($core,$favs)
 		'index.php?pf=discreteCat/icon.png','index.php?pf=discreteCat/icon-big.png',
 		'admin',null,null));
 }
-?>
