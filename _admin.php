@@ -15,7 +15,9 @@ if (!defined('DC_CONTEXT_ADMIN')) { return; }
 // dead but useful code, in order to have translations
 __('Discrete category').__('Exclude a category from Home and RSS/Atom feed');
 
-$_menu['Blog']->addItem(__('Discrete category'),'plugin.php?p=discreteCat','index.php?pf=discreteCat/icon.png',
+$_menu['Blog']->addItem(__('Discrete category'),
+		'plugin.php?p=discreteCat',
+		urldecode(dcPage::getPF('discreteCat/icon.png')),
 		preg_match('/plugin.php\?p=discreteCat(&.*)?$/',$_SERVER['REQUEST_URI']),
 		$core->auth->check('admin',$core->blog->id));
 
@@ -29,8 +31,8 @@ class adminDiscreteCat
 		$favs->register('discreteCat', array(
 			'title' => __('Discrete category'),
 			'url' => 'plugin.php?p=discreteCat',
-			'small-icon' => 'index.php?pf=discreteCat/icon.png',
-			'large-icon' => 'index.php?pf=discreteCat/icon-big.png',
+			'small-icon' => urldecode(dcPage::getPF('discreteCat/icon.png')),
+			'large-icon' => urldecode(dcPage::getPF('discreteCat/icon-big.png')),
 			'permissions' => 'admin'
 		));
 	}
