@@ -23,18 +23,18 @@ $_menu['Blog']->addItem(__('Discrete category'),
     $core->auth->check('admin', $core->blog->id));
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', array('adminDiscreteCat', 'adminDashboardFavorites'));
+$core->addBehavior('adminDashboardFavorites', ['adminDiscreteCat', 'adminDashboardFavorites']);
 
 class adminDiscreteCat
 {
     public static function adminDashboardFavorites($core, $favs)
     {
-        $favs->register('discreteCat', array(
+        $favs->register('discreteCat', [
             'title'       => __('Discrete category'),
             'url'         => 'plugin.php?p=discreteCat',
             'small-icon'  => urldecode(dcPage::getPF('discreteCat/icon.png')),
             'large-icon'  => urldecode(dcPage::getPF('discreteCat/icon-big.png')),
             'permissions' => 'admin'
-        ));
+        ]);
     }
 }

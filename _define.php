@@ -17,9 +17,10 @@ $this->registerModule(
     "Discrete category",                              // Name
     "Exclude a category from Home and RSS/Atom feed", // Description
     "Franck Paul",                                    // Author
-    '0.5',                                            // Version
-    array(
-        'permissions' => 'admin',  // Permissions
-        'type'        => 'plugin' // Type
-    )
+    '0.6',                                            // Version
+    [
+        'requires'    => [['core', '2.13']], // Dependencies
+        'permissions' => 'admin',            // Permissions
+        'type'        => 'plugin'           // Type
+    ]
 );

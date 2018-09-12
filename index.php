@@ -40,9 +40,9 @@ if (!empty($_POST)) {
     }
 }
 
-$categories_combo = array();
+$categories_combo = [];
 try {
-    $rs = $core->blog->getCategories(array('post_type' => 'post'));
+    $rs = $core->blog->getCategories(['post_type' => 'post']);
     while ($rs->fetch()) {
         $categories_combo[] = new formSelectOption(
             str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . html::escapeHTML($rs->cat_title),
@@ -60,10 +60,10 @@ try {
 <body>
 <?php
 echo dcPage::breadcrumb(
-    array(
+    [
         html::escapeHTML($core->blog->name) => '',
         __('Discrete category')             => ''
-    ));
+    ]);
 echo dcPage::notices();
 
 echo
@@ -71,7 +71,7 @@ echo
 '<p>' . form::checkbox('dc_active', 1, $dc_active) . ' ' .
 '<label for="dc_active" class="classic">' . __('Activate discrete categorie on this blog') . '</label></p>';
 
-$rs = $core->blog->getCategories(array('post_type' => 'post'));
+$rs = $core->blog->getCategories(['post_type' => 'post']);
 if ($rs->isEmpty()) {
     echo '<p>' . __('No category yet.') . '</p>';
 } else {
