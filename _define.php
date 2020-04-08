@@ -19,8 +19,10 @@ $this->registerModule(
     "Franck Paul",                                    // Author
     '0.6',                                            // Version
     [
-        'requires'    => [['core', '2.13']], // Dependencies
+        'requires'    => [['core', '2.16']], // Dependencies
         'permissions' => 'admin',            // Permissions
-        'type'        => 'plugin'           // Type
+        'type'        => 'plugin',           // Type
+        'settings'    => [                   // Settings
+        ]
     ]
 );
