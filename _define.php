@@ -27,6 +27,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/?q=discreteCat',       // Details URL
         'support'    => 'https://github.com/franck-paul/discreteCat', // Support URL
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/discreteCat/main/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/discreteCat/master/dcstore.xml'
     ]
 );
