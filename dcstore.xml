@@ -1,8 +1,8 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="discreteCat">
-    <name>Discrete category</name>
+    <name>Exclude a category from Home and RSS/Atom feed</name>
     <version>0.6</version>
-    <author>Franck Paul</author>
+    <author>Exclude a category from Home and RSS/Atom feed</author>
     <desc>Exclude a category from Home and RSS/Atom feed</desc>
     <file>https://github.com/franck-paul/discreteCat/releases/download/0.6/plugin-discreteCat-0.6.zip</file>
     <da:dcmin>2.16</da:dcmin>
