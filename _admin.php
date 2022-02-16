@@ -10,17 +10,20 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 // dead but useful code, in order to have translations
 __('Discrete category') . __('Exclude a category from Home and RSS/Atom feed');
 
-$_menu['Blog']->addItem(__('Discrete category'),
+$_menu['Blog']->addItem(
+    __('Discrete category'),
     'plugin.php?p=discreteCat',
-    urldecode(dcPage::getPF('discreteCat/icon.png')),
+    [urldecode(dcPage::getPF('discreteCat/icon.svg')), urldecode(dcPage::getPF('discreteCat/icon-dark.svg'))],
     preg_match('/plugin.php\?p=discreteCat(&.*)?$/', $_SERVER['REQUEST_URI']),
-    $core->auth->check('admin', $core->blog->id));
+    $core->auth->check('admin', $core->blog->id)
+);
 
 /* Register favorite */
 $core->addBehavior('adminDashboardFavorites', ['adminDiscreteCat', 'adminDashboardFavorites']);
@@ -30,11 +33,17 @@ class adminDiscreteCat
     public static function adminDashboardFavorites($core, $favs)
     {
         $favs->register('discreteCat', [
-            'title'       => __('Discrete category'),
-            'url'         => 'plugin.php?p=discreteCat',
-            'small-icon'  => urldecode(dcPage::getPF('discreteCat/icon.png')),
-            'large-icon'  => urldecode(dcPage::getPF('discreteCat/icon-big.png')),
-            'permissions' => 'admin'
+            'title'      => __('Discrete category'),
+            'url'        => 'plugin.php?p=discreteCat',
+            'small-icon' => [
+                urldecode(dcPage::getPF('discreteCat/icon.svg')),
+                urldecode(dcPage::getPF('discreteCat/icon-dark.svg')),
+            ],
+            'large-icon' => [
+                urldecode(dcPage::getPF('discreteCat/icon.svg')),
+                urldecode(dcPage::getPF('discreteCat/icon-dark.svg')),
+            ],
+            'permissions' => 'admin',
         ]);
     }
 }

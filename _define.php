@@ -18,15 +18,15 @@ $this->registerModule(
     'Discrete category',                              // Name
     'Exclude a category from Home and RSS/Atom feed', // Description
     'Franck Paul',                                    // Author
-    '0.6',                                            // Version
+    '1.0',                                            // Version
     [
-        'requires'    => [['core', '2.16']], // Dependencies
+        'requires'    => [['core', '2.21']], // Dependencies
         'permissions' => 'admin',            // Permissions
         'type'        => 'plugin',           // Type
         'settings'    => [],
 
         'details'    => 'https://open-time.net/?q=discreteCat',       // Details URL
         'support'    => 'https://github.com/franck-paul/discreteCat', // Support URL
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/discreteCat/master/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/discreteCat/master/dcstore.xml',
     ]
 );

@@ -10,17 +10,17 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-
-if (!defined('DC_CONTEXT_ADMIN')) {return;}
+if (!defined('DC_CONTEXT_ADMIN')) {
+    return;
+}
 
 $core->blog->settings->addNamespace('discretecat');
-$dc_active   = (boolean) $core->blog->settings->discretecat->discretecat_active;
+$dc_active   = (bool) $core->blog->settings->discretecat->discretecat_active;
 $dc_category = $core->blog->settings->discretecat->discretecat_cat;
 
 if (!empty($_POST)) {
-    try
-    {
-        $dc_active   = (boolean) $_POST['dc_active'];
+    try {
+        $dc_active   = (bool) $_POST['dc_active'];
         $dc_category = '';
         if (!empty($_POST['dc_category'])) {
             $dc_category = $_POST['dc_category'];
@@ -41,6 +41,7 @@ if (!empty($_POST)) {
 }
 
 $categories_combo = [];
+
 try {
     $rs = $core->blog->getCategories(['post_type' => 'post']);
     while ($rs->fetch()) {
@@ -49,7 +50,8 @@ try {
             $rs->cat_url
         );
     }
-} catch (Exception $e) {}
+} catch (Exception $e) {
+}
 
 ?>
 <html>
@@ -62,8 +64,9 @@ try {
 echo dcPage::breadcrumb(
     [
         html::escapeHTML($core->blog->name) => '',
-        __('Discrete category')             => ''
-    ]);
+        __('Discrete category')             => '',
+    ]
+);
 echo dcPage::notices();
 
 echo
