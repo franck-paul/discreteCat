@@ -14,25 +14,25 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$new_version = $core->plugins->moduleInfo('discreteCat', 'version');
-$old_version = $core->getVersion('discreteCat');
+$new_version = dcCore::app()->plugins->moduleInfo('discreteCat', 'version');
+$old_version = dcCore::app()->getVersion('discreteCat');
 
 if (version_compare($old_version, $new_version, '>=')) {
     return;
 }
 
 try {
-    $core->blog->settings->addNamespace('discretecat');
+    dcCore::app()->blog->settings->addNamespace('discretecat');
 
     // Default state is active for entries content and inactive for comments
-    $core->blog->settings->discretecat->put('discretecat_active', false, 'boolean', 'Active', false, true);
-    $core->blog->settings->discretecat->put('discretecat_cat', '', 'string', 'Category to exclude', false, true);
+    dcCore::app()->blog->settings->discretecat->put('discretecat_active', false, 'boolean', 'Active', false, true);
+    dcCore::app()->blog->settings->discretecat->put('discretecat_cat', '', 'string', 'Category to exclude', false, true);
 
-    $core->setVersion('discreteCat', $new_version);
+    dcCore::app()->setVersion('discreteCat', $new_version);
 
     return true;
 } catch (Exception $e) {
-    $core->error->add($e->getMessage());
+    dcCore::app()->error->add($e->getMessage());
 }
 
 return false;

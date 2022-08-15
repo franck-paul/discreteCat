@@ -14,9 +14,9 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$core->blog->settings->addNamespace('discretecat');
-$dc_active   = (bool) $core->blog->settings->discretecat->discretecat_active;
-$dc_category = $core->blog->settings->discretecat->discretecat_cat;
+dcCore::app()->blog->settings->addNamespace('discretecat');
+$dc_active   = (bool) dcCore::app()->blog->settings->discretecat->discretecat_active;
+$dc_category = dcCore::app()->blog->settings->discretecat->discretecat_cat;
 
 if (!empty($_POST)) {
     try {
@@ -27,23 +27,23 @@ if (!empty($_POST)) {
         }
 
         # Everything's fine, save options
-        $core->blog->settings->addNamespace('discretecat');
-        $core->blog->settings->discretecat->put('discretecat_active', $dc_active);
-        $core->blog->settings->discretecat->put('discretecat_cat', $dc_category);
+        dcCore::app()->blog->settings->addNamespace('discretecat');
+        dcCore::app()->blog->settings->discretecat->put('discretecat_active', $dc_active);
+        dcCore::app()->blog->settings->discretecat->put('discretecat_cat', $dc_category);
 
-        $core->blog->triggerBlog();
+        dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
         http::redirect($p_url);
     } catch (Exception $e) {
-        $core->error->add($e->getMessage());
+        dcCore::app()->error->add($e->getMessage());
     }
 }
 
 $categories_combo = [];
 
 try {
-    $rs = $core->blog->getCategories(['post_type' => 'post']);
+    $rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
     while ($rs->fetch()) {
         $categories_combo[] = new formSelectOption(
             str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . html::escapeHTML($rs->cat_title),
@@ -63,8 +63,8 @@ try {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML($core->blog->name) => '',
-        __('Discrete category')             => '',
+        html::escapeHTML(dcCore::app()->blog->name) => '',
+        __('Discrete category')                     => '',
     ]
 );
 echo dcPage::notices();
@@ -74,7 +74,7 @@ echo
 '<p>' . form::checkbox('dc_active', 1, $dc_active) . ' ' .
 '<label for="dc_active" class="classic">' . __('Activate discrete categorie on this blog') . '</label></p>';
 
-$rs = $core->blog->getCategories(['post_type' => 'post']);
+$rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
 if ($rs->isEmpty()) {
     echo '<p>' . __('No category yet.') . '</p>';
 } else {
@@ -84,7 +84,7 @@ if ($rs->isEmpty()) {
 }
 
 echo
-'<p>' . $core->formNonce() . '<input type="submit" value="' . __('Save') . '" /></p>' .
+'<p>' . dcCore::app()->formNonce() . '<input type="submit" value="' . __('Save') . '" /></p>' .
     '</form>';
 ?>
 </body>

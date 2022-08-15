@@ -22,11 +22,11 @@ $_menu['Blog']->addItem(
     'plugin.php?p=discreteCat',
     [urldecode(dcPage::getPF('discreteCat/icon.svg')), urldecode(dcPage::getPF('discreteCat/icon-dark.svg'))],
     preg_match('/plugin.php\?p=discreteCat(&.*)?$/', $_SERVER['REQUEST_URI']),
-    $core->auth->check('admin', $core->blog->id)
+    dcCore::app()->auth->check('admin', dcCore::app()->blog->id)
 );
 
 /* Register favorite */
-$core->addBehavior('adminDashboardFavorites', ['adminDiscreteCat', 'adminDashboardFavorites']);
+dcCore::app()->addBehavior('adminDashboardFavorites', ['adminDiscreteCat', 'adminDashboardFavorites']);
 
 class adminDiscreteCat
 {
