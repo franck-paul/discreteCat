@@ -51,6 +51,7 @@ try {
         );
     }
 } catch (Exception $e) {
+    // Ignore exceptions
 }
 
 ?>

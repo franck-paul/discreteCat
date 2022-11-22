@@ -15,18 +15,20 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'Discrete category',                              // Name
-    'Exclude a category from Home and RSS/Atom feed', // Description
-    'Franck Paul',                                    // Author
-    '1.1',                                            // Version
+    'Discrete category',
+    'Exclude a category from Home and RSS/Atom feed',
+    'Franck Paul',
+    '1.2',
     [
-        'requires'    => [['core', '2.23']], // Dependencies
-        'permissions' => 'admin',            // Permissions
-        'type'        => 'plugin',           // Type
-        'settings'    => [],
+        'requires'    => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_ADMIN,
+        ]),
+        'type'     => 'plugin',
+        'settings' => [],
 
-        'details'    => 'https://open-time.net/?q=discreteCat',       // Details URL
-        'support'    => 'https://github.com/franck-paul/discreteCat', // Support URL
+        'details'    => 'https://open-time.net/?q=discreteCat',
+        'support'    => 'https://github.com/franck-paul/discreteCat',
         'repository' => 'https://raw.githubusercontent.com/franck-paul/discreteCat/master/dcstore.xml',
     ]
 );

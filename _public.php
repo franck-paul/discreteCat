@@ -14,8 +14,6 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-dcCore::app()->addBehavior('coreBlogBeforeGetPosts', ['behaviorDiscreteCat', 'coreBlogBeforeGetPosts']);
-
 class behaviorDiscreteCat
 {
     public static function coreBlogBeforeGetPosts($params)
@@ -31,3 +29,5 @@ class behaviorDiscreteCat
         }
     }
 }
+
+dcCore::app()->addBehavior('coreBlogBeforeGetPosts', [behaviorDiscreteCat::class, 'coreBlogBeforeGetPosts']);
