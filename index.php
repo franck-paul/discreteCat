@@ -34,7 +34,7 @@ if (!empty($_POST)) {
         dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
-        http::redirect($p_url);
+        http::redirect(dcCore::app()->admin->getPageURL());
     } catch (Exception $e) {
         dcCore::app()->error->add($e->getMessage());
     }
@@ -71,7 +71,7 @@ echo dcPage::breadcrumb(
 echo dcPage::notices();
 
 echo
-'<form action="' . $p_url . '" method="post">' .
+'<form action="' . dcCore::app()->admin->getPageURL() . '" method="post">' .
 '<p>' . form::checkbox('dc_active', 1, $dc_active) . ' ' .
 '<label for="dc_active" class="classic">' . __('Activate discrete categorie on this blog') . '</label></p>';
 
