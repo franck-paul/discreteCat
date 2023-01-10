@@ -14,6 +14,8 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
+require_once __DIR__ . '/_widgets.php';
+
 // dead but useful code, in order to have translations
 __('Discrete category') . __('Exclude a category from Home and RSS/Atom feed');
 
@@ -32,13 +34,13 @@ class adminDiscreteCat
     public static function adminDashboardFavorites($favs)
     {
         $favs->register('discreteCat', [
-            'title'      => __('Discrete category'),
-            'url'        => 'plugin.php?p=discreteCat',
-            'small-icon' => [
+            'title'       => __('Discrete category'),
+            'url'         => 'plugin.php?p=discreteCat',
+            'small-icon'  => [
                 urldecode(dcPage::getPF('discreteCat/icon.svg')),
                 urldecode(dcPage::getPF('discreteCat/icon-dark.svg')),
             ],
-            'large-icon' => [
+            'large-icon'  => [
                 urldecode(dcPage::getPF('discreteCat/icon.svg')),
                 urldecode(dcPage::getPF('discreteCat/icon-dark.svg')),
             ],
@@ -51,3 +53,6 @@ class adminDiscreteCat
 
 /* Register favorite */
 dcCore::app()->addBehavior('adminDashboardFavoritesV2', [adminDiscreteCat::class, 'adminDashboardFavorites']);
+
+/* Register widget */
+dcCore::app()->addBehavior('initWidgets', [widgetDiscreteCat::class,'init']);

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 discreteCat module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 13:30+0200\n"
+"POT-Creation-Date: 2023-01-10 12:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,34 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../hg-plugins/discreteCat/_admin.php:16
-#: ../hg-plugins/discreteCat/_admin.php:18
-#: ../hg-plugins/discreteCat/index.php:58
-#: ../hg-plugins/discreteCat/index.php:66
+#: ../git-plugins/discreteCat/_admin.php:20
+#: ../git-plugins/discreteCat/_admin.php:23
+#: ../git-plugins/discreteCat/_admin.php:37
+#: ../git-plugins/discreteCat/index.php:58
+#: ../git-plugins/discreteCat/index.php:66
 msgid "Discrete category"
 msgstr ""
 
-#: ../hg-plugins/discreteCat/_admin.php:16
+#: ../git-plugins/discreteCat/_admin.php:20
 msgid "Exclude a category from Home and RSS/Atom feed"
 msgstr ""
 
-#: ../hg-plugins/discreteCat/index.php:76
+#: ../git-plugins/discreteCat/_widgets.php:77
+msgid "List of categories (discrete)"
+msgstr ""
+
+#: ../git-plugins/discreteCat/index.php:74
 msgid "Activate discrete categorie on this blog"
 msgstr ""
 
-#: ../hg-plugins/discreteCat/index.php:80
+#: ../git-plugins/discreteCat/index.php:78
 msgid "No category yet."
 msgstr ""
 
-#: ../hg-plugins/discreteCat/index.php:84
+#: ../git-plugins/discreteCat/index.php:82
 msgid "This category will be excluded from home and it's RSS/Atom feeds only."
+msgstr ""
+
+#: ../git-plugins/discreteCat/index.php:86
+msgid "Save"
 msgstr ""

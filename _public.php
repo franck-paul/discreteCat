@@ -14,6 +14,8 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
+require_once __DIR__ . '/_widgets.php';
+
 class behaviorDiscreteCat
 {
     public static function coreBlogBeforeGetPosts($params)
@@ -31,3 +33,6 @@ class behaviorDiscreteCat
 }
 
 dcCore::app()->addBehavior('coreBlogBeforeGetPosts', [behaviorDiscreteCat::class, 'coreBlogBeforeGetPosts']);
+
+/* Register widget */
+dcCore::app()->addBehavior('initWidgets', [widgetDiscreteCat::class,'init']);

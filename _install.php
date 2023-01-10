@@ -19,8 +19,6 @@ if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->module
 }
 
 try {
-    dcCore::app()->blog->settings->addNamespace('discretecat');
-
     // Default state is active for entries content and inactive for comments
     dcCore::app()->blog->settings->discretecat->put('discretecat_active', false, 'boolean', 'Active', false, true);
     dcCore::app()->blog->settings->discretecat->put('discretecat_cat', '', 'string', 'Category to exclude', false, true);

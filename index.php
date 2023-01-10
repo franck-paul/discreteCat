@@ -14,7 +14,6 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-dcCore::app()->blog->settings->addNamespace('discretecat');
 $dc_active   = (bool) dcCore::app()->blog->settings->discretecat->discretecat_active;
 $dc_category = dcCore::app()->blog->settings->discretecat->discretecat_cat;
 
@@ -27,7 +26,6 @@ if (!empty($_POST)) {
         }
 
         # Everything's fine, save options
-        dcCore::app()->blog->settings->addNamespace('discretecat');
         dcCore::app()->blog->settings->discretecat->put('discretecat_active', $dc_active);
         dcCore::app()->blog->settings->discretecat->put('discretecat_cat', $dc_category);
 
