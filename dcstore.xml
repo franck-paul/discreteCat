@@ -1,10 +1,10 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="discreteCat">
     <name>Discrete category</name>
-    <version>2.1</version>
+    <version>2.2</version>
     <author>Franck Paul</author>
     <desc>Exclude a category from Home and RSS/Atom feed</desc>
-    <file>https://github.com/franck-paul/discreteCat/releases/download/2.1/plugin-discreteCat-2.1.zip</file>
+    <file>https://github.com/franck-paul/discreteCat/releases/download/2.2/plugin-discreteCat-2.2.zip</file>
     <da:dcmin>2.24</da:dcmin>
     <da:details>https://open-time.net/?q=discreteCat</da:details>
     <da:support>https://github.com/franck-paul/discreteCat</da:support>
