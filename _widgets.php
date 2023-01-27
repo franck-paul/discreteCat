@@ -10,13 +10,24 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+use Dotclear\Plugin\widgets\WidgetsElement;
+use Dotclear\Plugin\widgets\WidgetsStack;
+
 if (!defined('DC_RC_PATH')) {
     return;
 }
 
 class widgetDiscreteCat
 {
-    public static function categories(dcWidget $widget): string
+    /**
+     * Render widget
+     *
+     * @param      \Dotclear\Plugin\widgets\WidgetsElement  $widget  The widget
+     *
+     * @return     string                                   Widget content rendered
+     */
+    public static function categories(WidgetsElement $widget): string
     {
         if ($widget->offline) {
             return '';
@@ -71,7 +82,12 @@ class widgetDiscreteCat
         return $widget->renderDiv($widget->content_only, 'categories ' . $widget->class, '', $res);
     }
 
-    public static function init($widgets)
+    /**
+     * Initializes the given widgets.
+     *
+     * @param      \Dotclear\Plugin\widgets\WidgetsStack  $widgets  The widgets
+     */
+    public static function init(WidgetsStack $widgets)
     {
         $widgets
             ->create('discreteCategories', __('List of categories (non discrete)'), [widgetDiscreteCat::class, 'categories'], null, 'List of categories (non discrete)')
