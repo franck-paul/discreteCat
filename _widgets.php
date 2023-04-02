@@ -11,12 +11,9 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsElement;
 use Dotclear\Plugin\widgets\WidgetsStack;
-
-if (!defined('DC_RC_PATH')) {
-    return;
-}
 
 class widgetDiscreteCat
 {
@@ -42,7 +39,7 @@ class widgetDiscreteCat
             return '';
         }
 
-        $res = ($widget->title ? $widget->renderTitle(html::escapeHTML($widget->title)) : '');
+        $res = ($widget->title ? $widget->renderTitle(Html::escapeHTML($widget->title)) : '');
 
         $ref_level = $level = $rs->level - 1;
         while ($rs->fetch()) {
@@ -69,7 +66,7 @@ class widgetDiscreteCat
             }
 
             $res .= '<a href="' . dcCore::app()->blog->url . dcCore::app()->url->getURLFor('category', $rs->cat_url) . '">' .
-            html::escapeHTML($rs->cat_title) . '</a>' .
+            Html::escapeHTML($rs->cat_title) . '</a>' .
                 ($widget->postcount ? ' <span>(' . ($widget->subcatscount ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
 
             $level = $rs->level;
