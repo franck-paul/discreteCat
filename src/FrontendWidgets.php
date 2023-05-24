@@ -81,6 +81,6 @@ class FrontendWidgets
             $res .= str_repeat('</li></ul>', -($ref_level - $level));
         }
 
-        return $widget->renderDiv($widget->content_only, 'categories ' . $widget->class, '', $res);
+        return $widget->renderDiv((bool) $widget->content_only, 'categories ' . $widget->class, '', $res);
     }
 }
