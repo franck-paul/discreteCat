@@ -65,8 +65,8 @@ class Install extends dcNsProcess
             $settings = dcCore::app()->blog->settings->get(My::id());
 
             // Default state is active for entries content and inactive for comments
-            $settings->put('active', false, 'boolean', 'Active', false, true);
-            $settings->put('cat', '', 'string', 'Category to exclude', false, true);
+            $settings->put('active', false, dcNamespace::NS_BOOL, 'Active', false, true);
+            $settings->put('cat', '', dcNamespace::NS_STRING, 'Category to exclude', false, true);
         } catch (Exception $e) {
             dcCore::app()->error->add($e->getMessage());
         }

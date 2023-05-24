@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\discreteCat;
 
 use dcCore;
+use dcNamespace;
 use dcNsProcess;
 use dcPage;
 use Dotclear\Helper\Html\Form\Checkbox;
@@ -59,8 +60,8 @@ class Manage extends dcNsProcess
 
                 // Everything's fine, save options
                 $settings = dcCore::app()->blog->settings->get(My::id());
-                $settings->put('active', $dc_active);
-                $settings->put('cat', $dc_category);
+                $settings->put('active', $dc_active, dcNamespace::NS_BOOL);
+                $settings->put('cat', $dc_category, dcNamespace::NS_STRING);
 
                 dcCore::app()->blog->triggerBlog();
 
