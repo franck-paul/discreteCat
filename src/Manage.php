@@ -92,9 +92,7 @@ class Manage extends dcNsProcess
         try {
             $rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
             while ($rs->fetch()) {
-                $categories_combo[] = [
-                    str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title) => $rs->cat_url,
-                ];
+                $categories_combo[str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
             }
         } catch (Exception $e) {
             // Ignore exceptions
@@ -111,44 +109,44 @@ class Manage extends dcNsProcess
         echo dcPage::notices();
 
         // Prepare form fields
-        $fields = [
-            (new Para())->items([
-                (new Checkbox('dc_active', $dc_active))
-                    ->value(1)
-                    ->label((new Label(__('Activate discrete categorie on this blog'), Label::INSIDE_TEXT_AFTER))),
-            ]),
-        ];
         $rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
         if ($rs->isEmpty()) {
-            $fields[] = [
+            $fields = [
                 (new Para())->items([
                     (new Text(null, __('No category yet.'))),
                 ]),
             ];
         } else {
-            $fields[] = [
-                (new Select('dc_category'))
-                    ->items($categories_combo)
-                    ->default($dc_category)
-                    ->label((new Label(__('Select category:'), Label::INSIDE_TEXT_BEFORE))),
+            $fields = [
+                (new Para())->items([
+                    (new Select('dc_category'))
+                        ->items($categories_combo)
+                        ->default($dc_category)
+                        ->label((new Label(__('Select category:'), Label::INSIDE_TEXT_BEFORE))),
+                ]),
                 (new Para())->class('form-note')->items([
                     (new Text(null, __('This category will be excluded from home and it\'s RSS/Atom feeds only.'))),
                 ]),
             ];
         }
-        $fields[] = [
-            (new Para())->items([
-                (new Submit(['frmsubmit']))
-                    ->value(__('Save')),
-                dcCore::app()->formNonce(false),
-            ]),
-        ];
 
         // Form
         echo (new Form('discrete-cat'))
             ->action(dcCore::app()->admin->getPageURL())
             ->method('post')
-            ->fields($fields)
+            ->fields([
+                (new Para())->items([
+                    (new Checkbox('dc_active', $dc_active))
+                        ->value(1)
+                        ->label((new Label(__('Activate discrete categorie on this blog'), Label::INSIDE_TEXT_AFTER))),
+                ]),
+                ...$fields,
+                (new Para())->items([
+                    (new Submit(['frmsubmit']))
+                        ->value(__('Save')),
+                    dcCore::app()->formNonce(false),
+                ]),
+            ])
         ->render();
 
         dcPage::closeModule();
