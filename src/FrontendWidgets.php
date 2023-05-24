@@ -10,12 +10,16 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+declare(strict_types=1);
 
+namespace Dotclear\Plugin\discreteCat;
+
+use dcCore;
+use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsElement;
-use Dotclear\Plugin\widgets\WidgetsStack;
 
-class widgetDiscreteCat
+class FrontendWidgets
 {
     /**
      * Render widget
@@ -41,17 +45,18 @@ class widgetDiscreteCat
 
         $res = ($widget->title ? $widget->renderTitle(Html::escapeHTML($widget->title)) : '');
 
+        $settings  = dcCore::app()->blog->settings->get(My::id());
         $ref_level = $level = $rs->level - 1;
         while ($rs->fetch()) {
-            if (dcCore::app()->blog->settings->discretecat->discretecat_active && (dcCore::app()->blog->settings->discretecat->discretecat_cat != '')) {
-                if (dcCore::app()->blog->settings->discretecat->discretecat_cat === $rs->cat_url) {
+            if ($settings->active && ($settings->cat != '')) {
+                if ($settings->cat === $rs->cat_url) {
                     // Ignore discrete category
                     continue;
                 }
             }
             $class = '';
-            if ((dcCore::app()->url->type == 'category' && dcCore::app()->ctx->categories instanceof dcRecord && dcCore::app()->ctx->categories->cat_id == $rs->cat_id)
-                || (dcCore::app()->url->type == 'post' && dcCore::app()->ctx->posts instanceof dcRecord && dcCore::app()->ctx->posts->cat_id == $rs->cat_id)) {
+            if ((dcCore::app()->url->type == 'category' && dcCore::app()->ctx->categories instanceof MetaRecord && dcCore::app()->ctx->categories->cat_id == $rs->cat_id)
+                || (dcCore::app()->url->type == 'post' && dcCore::app()->ctx->posts instanceof MetaRecord && dcCore::app()->ctx->posts->cat_id == $rs->cat_id)) {
                 $class = ' class="category-current"';
             }
 
@@ -77,24 +82,5 @@ class widgetDiscreteCat
         }
 
         return $widget->renderDiv($widget->content_only, 'categories ' . $widget->class, '', $res);
-    }
-
-    /**
-     * Initializes the given widgets.
-     *
-     * @param      \Dotclear\Plugin\widgets\WidgetsStack  $widgets  The widgets
-     */
-    public static function init(WidgetsStack $widgets)
-    {
-        $widgets
-            ->create('discreteCategories', __('List of categories (non discrete)'), [widgetDiscreteCat::class, 'categories'], null, 'List of categories (non discrete)')
-            ->addTitle(__('Categories'))
-            ->setting('postcount', __('With entries counts'), 0, 'check')
-            ->setting('subcatscount', __('Include sub cats in count'), false, 'check')
-            ->setting('with_empty', __('Include empty categories'), 0, 'check')
-            ->addHomeOnly()
-            ->addContentOnly()
-            ->addClass()
-            ->addOffline();
     }
 }
