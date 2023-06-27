@@ -14,7 +14,7 @@ $this->registerModule(
     'Discrete category',
     'Exclude a category from Home and RSS/Atom feed',
     'Franck Paul',
-    '3.1',
+    '3.1.1',
     [
         'requires'    => [['core', '2.26']],
         'permissions' => dcCore::app()->auth->makePermissions([
