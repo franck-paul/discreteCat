@@ -15,21 +15,18 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\discreteCat;
 
 use dcCore;
-use dcNsProcess;
+use Dotclear\Core\Process;
 
-class Frontend extends dcNsProcess
+class Frontend extends Process
 {
-    protected static $init = false; /** @deprecated since 2.27 */
     public static function init(): bool
     {
-        static::$init = My::checkContext(My::FRONTEND);
-
-        return static::$init;
+        return self::status(My::checkContext(My::FRONTEND));
     }
 
     public static function process(): bool
     {
-        if (!static::$init) {
+        if (!self::status()) {
             return false;
         }
 
@@ -39,10 +36,10 @@ class Frontend extends dcNsProcess
             return false;
         }
 
-        dcCore::app()->addBehavior('coreBlogBeforeGetPosts', [FrontendBehaviors::class, 'coreBlogBeforeGetPosts']);
+        dcCore::app()->addBehavior('coreBlogBeforeGetPosts', FrontendBehaviors::coreBlogBeforeGetPosts(...));
 
         /* Register widget */
-        dcCore::app()->addBehavior('initWidgets', [Widgets::class, 'initWidgets']);
+        dcCore::app()->addBehavior('initWidgets', Widgets::initWidgets(...));
 
         return true;
     }

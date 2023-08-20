@@ -26,7 +26,7 @@ class Widgets
     public static function initWidgets(WidgetsStack $widgets)
     {
         $widgets
-            ->create('discreteCategories', __('List of categories (non discrete)'), [FrontendWidgets::class, 'categories'], null, 'List of categories (non discrete)')
+            ->create('discreteCategories', __('List of categories (non discrete)'), FrontendWidgets::categories(...), null, 'List of categories (non discrete)')
             ->addTitle(__('Categories'))
             ->setting('postcount', __('With entries counts'), 0, 'check')
             ->setting('subcatscount', __('Include sub cats in count'), false, 'check')
