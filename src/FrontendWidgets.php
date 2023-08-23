@@ -45,7 +45,7 @@ class FrontendWidgets
 
         $res = ($widget->title ? $widget->renderTitle(Html::escapeHTML($widget->title)) : '');
 
-        $settings  = dcCore::app()->blog->settings->get(My::id());
+        $settings  = My::settings();
         $ref_level = $level = $rs->level - 1;
         while ($rs->fetch()) {
             if ($settings->active && ($settings->cat != '')) {

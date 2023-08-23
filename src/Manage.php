@@ -57,7 +57,7 @@ class Manage extends Process
                 }
 
                 // Everything's fine, save options
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
                 $settings->put('active', $dc_active, dcNamespace::NS_BOOL);
                 $settings->put('cat', $dc_category, dcNamespace::NS_STRING);
 
@@ -82,7 +82,7 @@ class Manage extends Process
             return;
         }
 
-        $settings    = dcCore::app()->blog->settings->get(My::id());
+        $settings    = My::settings();
         $dc_active   = (bool) $settings->active;
         $dc_category = $settings->cat;
 
@@ -97,7 +97,7 @@ class Manage extends Process
             // Ignore exceptions
         }
 
-        Page::openModule(__('Discrete category'));
+        Page::openModule(My::name());
 
         echo Page::breadcrumb(
             [
@@ -143,7 +143,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['frmsubmit']))
                         ->value(__('Save')),
-                    dcCore::app()->formNonce(false),
+                    ... My::hiddenFields(),
                 ]),
             ])
         ->render();

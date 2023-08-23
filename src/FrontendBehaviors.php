@@ -20,7 +20,7 @@ class FrontendBehaviors
 {
     public static function coreBlogBeforeGetPosts($params)
     {
-        $settings = dcCore::app()->blog->settings->get(My::id());
+        $settings = My::settings();
         if ($settings->active && ($settings->cat != '')) {
             // discreteCat active and a category to exclude
             if (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not'])) {
