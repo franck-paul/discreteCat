@@ -24,9 +24,9 @@ class FrontendWidgets
     /**
      * Render widget
      *
-     * @param      \Dotclear\Plugin\widgets\WidgetsElement  $widget  The widget
+     * @param      WidgetsElement  $widget  The widget
      *
-     * @return     string                                   Widget content rendered
+     * @return     string Widget content rendered
      */
     public static function categories(WidgetsElement $widget): string
     {

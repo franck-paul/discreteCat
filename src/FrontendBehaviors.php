@@ -14,11 +14,15 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\discreteCat;
 
+use ArrayObject;
 use dcCore;
 
 class FrontendBehaviors
 {
-    public static function coreBlogBeforeGetPosts($params)
+    /**
+     * @param      ArrayObject<string, mixed>  $params  The parameters
+     */
+    public static function coreBlogBeforeGetPosts(ArrayObject $params): string
     {
         $settings = My::settings();
         if ($settings->active && ($settings->cat != '')) {
@@ -30,5 +34,7 @@ class FrontendBehaviors
                 }
             }
         }
+
+        return '';
     }
 }

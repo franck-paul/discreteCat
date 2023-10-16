@@ -21,9 +21,9 @@ class Widgets
     /**
      * Initializes the given widgets.
      *
-     * @param      \Dotclear\Plugin\widgets\WidgetsStack  $widgets  The widgets
+     * @param      WidgetsStack  $widgets  The widgets
      */
-    public static function initWidgets(WidgetsStack $widgets)
+    public static function initWidgets(WidgetsStack $widgets): string
     {
         $widgets
             ->create('discreteCategories', __('List of categories (non discrete)'), FrontendWidgets::categories(...), null, 'List of categories (non discrete)')
@@ -35,5 +35,7 @@ class Widgets
             ->addContentOnly()
             ->addClass()
             ->addOffline();
+
+        return '';
     }
 }
