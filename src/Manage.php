@@ -16,6 +16,7 @@ namespace Dotclear\Plugin\discreteCat;
 
 use dcCore;
 use dcNamespace;
+use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
@@ -61,7 +62,7 @@ class Manage extends Process
                 $settings->put('active', $dc_active, dcNamespace::NS_BOOL);
                 $settings->put('cat', $dc_category, dcNamespace::NS_STRING);
 
-                dcCore::app()->blog->triggerBlog();
+                App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Settings have been successfully updated.'));
                 dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
@@ -89,7 +90,7 @@ class Manage extends Process
         $categories_combo = [];
 
         try {
-            $rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
+            $rs = App::blog()->getCategories(['post_type' => 'post']);
             while ($rs->fetch()) {
                 $categories_combo[str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
             }
@@ -101,14 +102,14 @@ class Manage extends Process
 
         echo Page::breadcrumb(
             [
-                Html::escapeHTML(dcCore::app()->blog->name) => '',
-                __('Discrete category')                     => '',
+                Html::escapeHTML(App::blog()->name()) => '',
+                __('Discrete category')               => '',
             ]
         );
         echo Notices::getNotices();
 
         // Prepare form fields
-        $rs = dcCore::app()->blog->getCategories(['post_type' => 'post']);
+        $rs = App::blog()->getCategories(['post_type' => 'post']);
         if ($rs->isEmpty()) {
             $fields = [
                 (new Para())->items([

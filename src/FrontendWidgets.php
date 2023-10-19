@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\discreteCat;
 
 use dcCore;
+use Dotclear\App;
 use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Html;
 use Dotclear\Plugin\widgets\WidgetsElement;
@@ -38,7 +39,7 @@ class FrontendWidgets
             return '';
         }
 
-        $rs = dcCore::app()->blog->getCategories(['post_type' => 'post', 'without_empty' => !$widget->with_empty]);
+        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$widget->with_empty]);
         if ($rs->isEmpty()) {
             return '';
         }
@@ -70,7 +71,7 @@ class FrontendWidgets
                 $res .= '</li><li' . $class . '>';
             }
 
-            $res .= '<a href="' . dcCore::app()->blog->url . dcCore::app()->url->getURLFor('category', $rs->cat_url) . '">' .
+            $res .= '<a href="' . App::blog()->url() . dcCore::app()->url->getURLFor('category', $rs->cat_url) . '">' .
             Html::escapeHTML($rs->cat_title) . '</a>' .
                 ($widget->postcount ? ' <span>(' . ($widget->subcatscount ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
 
