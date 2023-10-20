@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\discreteCat;
 
-use dcCore;
 use Dotclear\App;
 use Dotclear\Database\MetaRecord;
 use Dotclear\Helper\Html\Html;
@@ -35,7 +34,7 @@ class FrontendWidgets
             return '';
         }
 
-        if (!$widget->checkHomeOnly(dcCore::app()->url->type)) {
+        if (!$widget->checkHomeOnly(App::url()->type)) {
             return '';
         }
 
@@ -56,8 +55,8 @@ class FrontendWidgets
                 }
             }
             $class = '';
-            if ((dcCore::app()->url->type == 'category' && dcCore::app()->ctx->categories instanceof MetaRecord && dcCore::app()->ctx->categories->cat_id == $rs->cat_id)
-                || (dcCore::app()->url->type == 'post' && dcCore::app()->ctx->posts instanceof MetaRecord && dcCore::app()->ctx->posts->cat_id == $rs->cat_id)) {
+            if ((App::url()->type == 'category' && App::frontend()->context()->categories instanceof MetaRecord && App::frontend()->context()->categories->cat_id == $rs->cat_id)
+                || (App::url()->type == 'post' && App::frontend()->context()->posts instanceof MetaRecord && App::frontend()->context()->posts->cat_id == $rs->cat_id)) {
                 $class = ' class="category-current"';
             }
 
@@ -71,7 +70,7 @@ class FrontendWidgets
                 $res .= '</li><li' . $class . '>';
             }
 
-            $res .= '<a href="' . App::blog()->url() . dcCore::app()->url->getURLFor('category', $rs->cat_url) . '">' .
+            $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $rs->cat_url) . '">' .
             Html::escapeHTML($rs->cat_title) . '</a>' .
                 ($widget->postcount ? ' <span>(' . ($widget->subcatscount ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
 

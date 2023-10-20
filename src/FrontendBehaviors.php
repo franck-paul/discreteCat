@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\discreteCat;
 
 use ArrayObject;
-use dcCore;
+use Dotclear\App;
 
 class FrontendBehaviors
 {
@@ -29,7 +29,7 @@ class FrontendBehaviors
             // discreteCat active and a category to exclude
             if (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not'])) {
                 $url_types = ['default', 'default-page', 'feed'];
-                if (in_array(dcCore::app()->url->type, $url_types)) {
+                if (in_array(App::url()->type, $url_types)) {
                     $params['cat_url'] = $settings->cat . ' ?not';
                 }
             }

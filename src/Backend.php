@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\discreteCat;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Favorites;
 use Dotclear\Core\Backend\Menus;
 use Dotclear\Core\Process;
@@ -38,7 +38,7 @@ class Backend extends Process
         My::addBackendMenuItem(Menus::MENU_BLOG);
 
         /* Register favorite */
-        dcCore::app()->addBehavior('adminDashboardFavoritesV2', function (Favorites $favs) {
+        App::behavior()->addBehavior('adminDashboardFavoritesV2', function (Favorites $favs) {
             $favs->register('sysInfo', [
                 'title'       => __('Discrete category'),
                 'url'         => My::manageUrl(),
@@ -49,7 +49,7 @@ class Backend extends Process
         });
 
         /* Register widget */
-        dcCore::app()->addBehavior('initWidgets', Widgets::initWidgets(...));
+        App::behavior()->addBehavior('initWidgets', Widgets::initWidgets(...));
 
         return true;
     }

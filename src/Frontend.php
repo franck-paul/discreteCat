@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\discreteCat;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 
 class Frontend extends Process
@@ -36,10 +36,10 @@ class Frontend extends Process
             return false;
         }
 
-        dcCore::app()->addBehavior('coreBlogBeforeGetPosts', FrontendBehaviors::coreBlogBeforeGetPosts(...));
+        App::behavior()->addBehavior('coreBlogBeforeGetPosts', FrontendBehaviors::coreBlogBeforeGetPosts(...));
 
         /* Register widget */
-        dcCore::app()->addBehavior('initWidgets', Widgets::initWidgets(...));
+        App::behavior()->addBehavior('initWidgets', Widgets::initWidgets(...));
 
         return true;
     }

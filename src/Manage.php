@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\discreteCat;
 
-use dcCore;
-use dcNamespace;
 use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
@@ -59,15 +57,15 @@ class Manage extends Process
 
                 // Everything's fine, save options
                 $settings = My::settings();
-                $settings->put('active', $dc_active, dcNamespace::NS_BOOL);
-                $settings->put('cat', $dc_category, dcNamespace::NS_STRING);
+                $settings->put('active', $dc_active, App::blogWorkspace()::NS_BOOL);
+                $settings->put('cat', $dc_category, App::blogWorkspace()::NS_STRING);
 
                 App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Settings have been successfully updated.'));
-                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
+                My::redirect();
             } catch (Exception $e) {
-                dcCore::app()->error->add($e->getMessage());
+                App::error()->add($e->getMessage());
             }
         }
 
@@ -132,7 +130,7 @@ class Manage extends Process
 
         // Form
         echo (new Form('discrete-cat'))
-            ->action(dcCore::app()->admin->getPageURL())
+            ->action(App::backend()->getPageURL())
             ->method('post')
             ->fields([
                 (new Para())->items([
