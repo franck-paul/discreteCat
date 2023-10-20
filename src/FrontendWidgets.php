@@ -61,9 +61,9 @@ class FrontendWidgets
             }
 
             if ($rs->level > $level) {
-                $res .= str_repeat('<ul><li' . $class . '>', $rs->level - $level);
+                $res .= str_repeat('<ul><li' . $class . '>', (int) ($rs->level - $level));
             } elseif ($rs->level < $level) {
-                $res .= str_repeat('</li></ul>', -($rs->level - $level));
+                $res .= str_repeat('</li></ul>', (int) -($rs->level - $level));
             }
 
             if ($rs->level <= $level) {
@@ -78,7 +78,7 @@ class FrontendWidgets
         }
 
         if ($ref_level - $level < 0) {
-            $res .= str_repeat('</li></ul>', -($ref_level - $level));
+            $res .= str_repeat('</li></ul>', (int) -($ref_level - $level));
         }
 
         return $widget->renderDiv((bool) $widget->content_only, 'categories ' . $widget->class, '', $res);

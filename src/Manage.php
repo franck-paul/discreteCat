@@ -90,7 +90,7 @@ class Manage extends Process
         try {
             $rs = App::blog()->getCategories(['post_type' => 'post']);
             while ($rs->fetch()) {
-                $categories_combo[str_repeat('&nbsp;&nbsp;', $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
+                $categories_combo[str_repeat('&nbsp;&nbsp;', (int) $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
             }
         } catch (Exception $e) {
             // Ignore exceptions
