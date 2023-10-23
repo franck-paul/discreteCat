@@ -24,26 +24,26 @@ class FrontendWidgets
     /**
      * Render widget
      *
-     * @param      WidgetsElement  $widget  The widget
+     * @param      WidgetsElement  $w  The widget
      *
      * @return     string Widget content rendered
      */
-    public static function categories(WidgetsElement $widget): string
+    public static function categories(WidgetsElement $w): string
     {
-        if ($widget->offline) {
+        if ($w->offline) {
             return '';
         }
 
-        if (!$widget->checkHomeOnly(App::url()->type)) {
+        if (!$w->checkHomeOnly(App::url()->type)) {
             return '';
         }
 
-        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$widget->with_empty]);
+        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$w->get('with_empty')]);
         if ($rs->isEmpty()) {
             return '';
         }
 
-        $res = ($widget->title ? $widget->renderTitle(Html::escapeHTML($widget->title)) : '');
+        $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
 
         $settings  = My::settings();
         $ref_level = $level = $rs->level - 1;
@@ -72,7 +72,7 @@ class FrontendWidgets
 
             $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $rs->cat_url) . '">' .
             Html::escapeHTML($rs->cat_title) . '</a>' .
-                ($widget->postcount ? ' <span>(' . ($widget->subcatscount ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
+                ($w->get('postcount') ? ' <span>(' . ($w->get('subcatscount') ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
 
             $level = $rs->level;
         }
@@ -81,6 +81,6 @@ class FrontendWidgets
             $res .= str_repeat('</li></ul>', (int) -($ref_level - $level));
         }
 
-        return $widget->renderDiv((bool) $widget->content_only, 'categories ' . $widget->class, '', $res);
+        return $w->renderDiv((bool) $w->content_only, 'categories ' . $w->class, '', $res);
     }
 }
