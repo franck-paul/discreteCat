@@ -47,7 +47,7 @@ class Manage extends Process
             return false;
         }
 
-        if (!empty($_POST)) {
+        if ($_POST !== []) {
             try {
                 $dc_active   = (bool) $_POST['dc_active'];
                 $dc_category = '';
@@ -92,7 +92,7 @@ class Manage extends Process
             while ($rs->fetch()) {
                 $categories_combo[str_repeat('&nbsp;&nbsp;', (int) $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
             }
-        } catch (Exception $e) {
+        } catch (Exception) {
             // Ignore exceptions
         }
 

@@ -34,7 +34,7 @@ class FrontendWidgets
             return '';
         }
 
-        if (!$w->checkHomeOnly(App::url()->type)) {
+        if (!$w->checkHomeOnly(App::url()->getType())) {
             return '';
         }
 
@@ -46,17 +46,17 @@ class FrontendWidgets
         $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
 
         $settings  = My::settings();
-        $ref_level = $level = $rs->level - 1;
+        $ref_level = $rs->level - 1;
+        $level = $rs->level - 1;
         while ($rs->fetch()) {
-            if ($settings->active && ($settings->cat != '')) {
-                if ($settings->cat === $rs->cat_url) {
-                    // Ignore discrete category
-                    continue;
-                }
+            if ($settings->active && $settings->cat != '' && $settings->cat === $rs->cat_url) {
+                // Ignore discrete category
+                continue;
             }
+
             $class = '';
-            if ((App::url()->type == 'category' && App::frontend()->context()->categories instanceof MetaRecord && App::frontend()->context()->categories->cat_id == $rs->cat_id)
-                || (App::url()->type == 'post' && App::frontend()->context()->posts instanceof MetaRecord && App::frontend()->context()->posts->cat_id == $rs->cat_id)) {
+            if ((App::url()->getType() == 'category' && App::frontend()->context()->categories instanceof MetaRecord && App::frontend()->context()->categories->cat_id == $rs->cat_id)
+                || (App::url()->getType() == 'post' && App::frontend()->context()->posts instanceof MetaRecord && App::frontend()->context()->posts->cat_id == $rs->cat_id)) {
                 $class = ' class="category-current"';
             }
 

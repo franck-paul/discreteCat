@@ -25,13 +25,11 @@ class FrontendBehaviors
     public static function coreBlogBeforeGetPosts(ArrayObject $params): string
     {
         $settings = My::settings();
-        if ($settings->active && ($settings->cat != '')) {
-            // discreteCat active and a category to exclude
-            if (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not'])) {
-                $url_types = ['default', 'default-page', 'feed'];
-                if (in_array(App::url()->type, $url_types)) {
-                    $params['cat_url'] = $settings->cat . ' ?not';
-                }
+        // discreteCat active and a category to exclude
+        if ($settings->active && $settings->cat != '' && (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not']))) {
+            $url_types = ['default', 'default-page', 'feed'];
+            if (in_array(App::url()->getType(), $url_types)) {
+                $params['cat_url'] = $settings->cat . ' ?not';
             }
         }
 

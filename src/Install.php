@@ -43,7 +43,7 @@ class Install extends Process
                 }
 
                 // Change settings names (remove discretecat_ prefix in them)
-                $rename = function (string $name, BlogWorkspaceInterface $settings): void {
+                $rename = static function (string $name, BlogWorkspaceInterface $settings) : void {
                     if ($settings->settingExists('discretecat_' . $name, true)) {
                         $settings->rename('discretecat_' . $name, $name);
                     }
@@ -65,8 +65,8 @@ class Install extends Process
             // Default state is active for entries content and inactive for comments
             $settings->put('active', false, App::blogWorkspace()::NS_BOOL, 'Active', false, true);
             $settings->put('cat', '', App::blogWorkspace()::NS_STRING, 'Category to exclude', false, true);
-        } catch (Exception $e) {
-            App::error()->add($e->getMessage());
+        } catch (Exception $exception) {
+            App::error()->add($exception->getMessage());
         }
 
         return true;
