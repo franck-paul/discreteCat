@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief discreteCat, a plugin for Dotclear 2
  *
@@ -23,7 +24,8 @@ class Backend extends Process
     public static function init(): bool
     {
         // dead but useful code, in order to have translations
-        __('Discrete category') . __('Exclude a category from Home and RSS/Atom feed');
+        __('Discrete category');
+        __('Exclude a category from Home and RSS/Atom feed');
 
         return self::status(My::checkContext(My::BACKEND));
     }
@@ -37,7 +39,7 @@ class Backend extends Process
         My::addBackendMenuItem(App::backend()->menus()::MENU_BLOG);
 
         /* Register favorite */
-        App::behavior()->addBehavior('adminDashboardFavoritesV2', static function (Favorites $favs) {
+        App::behavior()->addBehavior('adminDashboardFavoritesV2', static function (Favorites $favs): string {
             $favs->register('sysInfo', [
                 'title'       => __('Discrete category'),
                 'url'         => My::manageUrl(),
@@ -45,6 +47,8 @@ class Backend extends Process
                 'large-icon'  => My::icons(),
                 'permissions' => My::checkContext(My::MENU),
             ]);
+
+            return '';
         });
 
         /* Register widget */
