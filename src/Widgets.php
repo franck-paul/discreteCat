@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief discreteCat, a plugin for Dotclear 2
  *
@@ -26,7 +27,7 @@ class Widgets
     public static function initWidgets(WidgetsStack $widgets): string
     {
         $widgets
-            ->create('discreteCategories', __('List of categories (non discrete)'), FrontendWidgets::categories(...), null, 'List of categories (non discrete)')
+            ->create('discreteCategories', __('List of categories (non discrete)'), FrontendWidgets::categories(...), null, 'List of categories (non discrete)', My::id())
             ->addTitle(__('Categories'))
             ->setting('postcount', __('With entries counts'), 0, 'check')
             ->setting('subcatscount', __('Include sub cats in count'), false, 'check')
