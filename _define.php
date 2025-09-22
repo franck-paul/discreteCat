@@ -15,9 +15,9 @@ $this->registerModule(
     'Discrete category',
     'Exclude a category from Home and RSS/Atom feed',
     'Franck Paul',
-    '6.0',
+    '6.1',
     [
-        'date'        => '2025-09-07T16:09:17+0200',
+        'date'        => '2025-09-22T10:34:43+0200',
         'requires'    => [['core', '2.36']],
         'permissions' => '',
         'type'        => 'plugin',
