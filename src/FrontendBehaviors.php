@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief discreteCat, a plugin for Dotclear 2
  *
@@ -24,12 +25,17 @@ class FrontendBehaviors
      */
     public static function coreBlogBeforeGetPosts(ArrayObject $params): string
     {
+        // Variable data helpers
+        $_Bool = fn (mixed $var): bool => (bool) $var;
+        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
+
         $settings = My::settings();
+
         // discreteCat active and a category to exclude
-        if ($settings->active && $settings->cat != '' && (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not']))) {
+        if ($_Bool($settings->active) && $_Str($settings->cat) !== '' && (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not']))) {
             $url_types = ['default', 'default-page', 'feed'];
             if (in_array(App::url()->getType(), $url_types)) {
-                $params['cat_url'] = $settings->cat . ' ?not';
+                $params['cat_url'] = $_Str($settings->cat) . ' ?not';
             }
         }
 

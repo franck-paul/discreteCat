@@ -50,16 +50,14 @@ class Manage
 
         if ($_POST !== []) {
             try {
-                $dc_active   = (bool) $_POST['dc_active'];
-                $dc_category = '';
-                if (!empty($_POST['dc_category'])) {
-                    $dc_category = $_POST['dc_category'];
-                }
+                // Post data helpers
+                $_Bool = fn (string $name): bool => !empty($_POST[$name]);
+                $_Str  = fn (string $name, string $default = ''): string => isset($_POST[$name]) && is_string($val = $_POST[$name]) ? $val : $default;
 
                 // Everything's fine, save options
                 $settings = My::settings();
-                $settings->put('active', $dc_active, App::blogWorkspace()::NS_BOOL);
-                $settings->put('cat', $dc_category, App::blogWorkspace()::NS_STRING);
+                $settings->put('active', $_Bool('dc_active'), App::blogWorkspace()::NS_BOOL);
+                $settings->put('cat', $_Str('dc_category'), App::blogWorkspace()::NS_STRING);
 
                 App::blog()->triggerBlog();
 
@@ -82,20 +80,20 @@ class Manage
             return;
         }
 
-        $settings    = My::settings();
-        $dc_active   = (bool) $settings->active;
-        $dc_category = $settings->cat;
+        // Variable data helpers
+        $_Bool = fn (mixed $var): bool => (bool) $var;
+        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
 
-        $categories_combo = [];
+        $settings = My::settings();
 
-        try {
-            $rs = App::blog()->getCategories(['post_type' => 'post']);
-            while ($rs->fetch()) {
-                $categories_combo[str_repeat('&nbsp;&nbsp;', (int) $rs->level - 1) . ($rs->level - 1 == 0 ? '' : '&bull; ') . Html::escapeHTML($rs->cat_title)] = $rs->cat_url;
-            }
-        } catch (Exception) {
-            // Ignore exceptions
-        }
+        $dc_active   = $_Bool($settings->active);
+        $dc_category = $_Str($settings->cat);
+
+        $categories_combo = App::backend()->combos()->getCategoriesCombo(
+            App::blog()->getCategories(['post_type' => 'post']),
+            true,
+            true
+        );
 
         App::backend()->page()->openModule(My::name());
 

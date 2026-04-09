@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brief discreteCat, a plugin for Dotclear 2
  *
@@ -45,11 +46,18 @@ class FrontendWidgets
 
         $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
 
-        $settings  = My::settings();
-        $ref_level = $rs->level - 1;
-        $level = $rs->level - 1;
+        // Variable data helpers
+        $_Bool = fn (mixed $var): bool => (bool) $var;
+        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
+
+        $settings = My::settings();
+
+        $cat_level = is_numeric($cat_level = $rs->level) ? (int) $cat_level - 1 : 0;
+
+        $ref_level = $cat_level;
+        $level     = $cat_level;
         while ($rs->fetch()) {
-            if ($settings->active && $settings->cat != '' && $settings->cat === $rs->cat_url) {
+            if ($_Bool($settings->active) && $_Str($settings->cat) !== '' && $_Str($settings->cat) === $rs->cat_url) {
                 // Ignore discrete category
                 continue;
             }
@@ -60,25 +68,31 @@ class FrontendWidgets
                 $class = ' class="category-current"';
             }
 
-            if ($rs->level > $level) {
-                $res .= str_repeat('<ul><li' . $class . '>', (int) ($rs->level - $level));
-            } elseif ($rs->level < $level) {
-                $res .= str_repeat('</li></ul>', (int) -($rs->level - $level));
+            $cat_level = is_numeric($cat_level = $rs->level) ? (int) $cat_level - 1 : 0;
+            if ($cat_level > $level) {
+                $res .= str_repeat('<ul><li' . $class . '>', $cat_level - $level);
+            } elseif ($cat_level < $level) {
+                $res .= str_repeat('</li></ul>', -($cat_level - $level));
             }
 
-            if ($rs->level <= $level) {
+            if ($cat_level <= $level) {
                 $res .= '</li><li' . $class . '>';
             }
 
-            $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $rs->cat_url) . '">' .
-            Html::escapeHTML($rs->cat_title) . '</a>' .
-                ($w->get('postcount') ? ' <span>(' . ($w->get('subcatscount') ? $rs->nb_total : $rs->nb_post) . ')</span>' : '');
+            $cat_url   = is_string($cat_url = $rs->cat_url) ? $cat_url : '';
+            $cat_title = is_string($cat_title = $rs->cat_title) ? $cat_title : '';
+            $nb_total  = is_numeric($nb_total = $rs->nb_total) ? (int) $nb_total : 0;
+            $nb_post   = is_numeric($nb_post = $rs->nb_post) ? (int) $nb_post : 0;
 
-            $level = $rs->level;
+            $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $cat_url) . '">' .
+            Html::escapeHTML($cat_title) . '</a>' .
+                ($w->get('postcount') ? ' <span>(' . ($w->get('subcatscount') ? $nb_total : $nb_post) . ')</span>' : '');
+
+            $level = $cat_level;
         }
 
         if ($ref_level - $level < 0) {
-            $res .= str_repeat('</li></ul>', (int) -($ref_level - $level));
+            $res .= str_repeat('</li></ul>', -($ref_level - $level));
         }
 
         return $w->renderDiv((bool) $w->content_only, 'categories ' . $w->class, '', $res);
