@@ -63,12 +63,17 @@ class FrontendWidgets
             }
 
             $class = '';
-            if ((App::url()->getType() == 'category' && App::frontend()->context()->categories instanceof MetaRecord && App::frontend()->context()->categories->cat_id == $rs->cat_id)
-                || (App::url()->getType() == 'post' && App::frontend()->context()->posts instanceof MetaRecord && App::frontend()->context()->posts->cat_id == $rs->cat_id)) {
+            if ((App::url()->getType() === 'category'
+                    && App::frontend()->context()->categories instanceof MetaRecord
+                    && App::frontend()->context()->categories->intField('cat_id') === $rs->intField('cat_id'))
+                || (App::url()->getType() === 'post'
+                    && App::frontend()->context()->posts instanceof MetaRecord
+                    && App::frontend()->context()->posts->intField('cat_id') === $rs->intField('cat_id'))
+            ) {
                 $class = ' class="category-current"';
             }
 
-            $cat_level = is_numeric($cat_level = $rs->level) ? (int) $cat_level - 1 : 0;
+            $cat_level = max(0, $rs->intField('level') - 1);
             if ($cat_level > $level) {
                 $res .= str_repeat('<ul><li' . $class . '>', $cat_level - $level);
             } elseif ($cat_level < $level) {
@@ -79,10 +84,10 @@ class FrontendWidgets
                 $res .= '</li><li' . $class . '>';
             }
 
-            $cat_url   = is_string($cat_url = $rs->cat_url) ? $cat_url : '';
-            $cat_title = is_string($cat_title = $rs->cat_title) ? $cat_title : '';
-            $nb_total  = is_numeric($nb_total = $rs->nb_total) ? (int) $nb_total : 0;
-            $nb_post   = is_numeric($nb_post = $rs->nb_post) ? (int) $nb_post : 0;
+            $cat_url   = $rs->strField('cat_url');
+            $cat_title = $rs->strField('cat_title');
+            $nb_total  = $rs->intField('nb_total');
+            $nb_post   = $rs->intField('nb_post');
 
             $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $cat_url) . '">' .
             Html::escapeHTML($cat_title) . '</a>' .
