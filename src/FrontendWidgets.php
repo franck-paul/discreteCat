@@ -46,10 +46,6 @@ class FrontendWidgets
 
         $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
 
-        // Variable data helpers
-        $_Bool = fn (mixed $var): bool => (bool) $var;
-        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
-
         $settings = My::settings();
 
         $cat_level = is_numeric($cat_level = $rs->level) ? (int) $cat_level - 1 : 0;
@@ -57,7 +53,10 @@ class FrontendWidgets
         $ref_level = $cat_level;
         $level     = $cat_level;
         while ($rs->fetch()) {
-            if ($_Bool($settings->active) && $_Str($settings->cat) !== '' && $_Str($settings->cat) === $rs->cat_url) {
+            if ($settings->getBool('active')
+                && $settings->getStr('cat', false) !== ''
+                && $settings->getStr('cat', false) === $rs->cat_url
+            ) {
                 // Ignore discrete category
                 continue;
             }

@@ -80,14 +80,10 @@ class Manage
             return;
         }
 
-        // Variable data helpers
-        $_Bool = fn (mixed $var): bool => (bool) $var;
-        $_Str  = fn (mixed $var, string $default = ''): string => $var !== null && is_string($val = $var) ? $val : $default;
-
         $settings = My::settings();
 
-        $dc_active   = $_Bool($settings->active);
-        $dc_category = $_Str($settings->cat);
+        $dc_active   = $settings->getBool('active', false);
+        $dc_category = $settings->getStr('cat', false);
 
         $categories_combo = App::backend()->combos()->getCategoriesCombo(
             App::blog()->getCategories(['post_type' => 'post']),
