@@ -48,14 +48,17 @@ class FrontendWidgets
 
         $settings = My::settings();
 
-        $cat_level = is_numeric($cat_level = $rs->level) ? (int) $cat_level - 1 : 0;
+        $cat_level = $rs->intField('level');
+        if ($cat_level > 0) {
+            $cat_level--;
+        }
 
         $ref_level = $cat_level;
         $level     = $cat_level;
         while ($rs->fetch()) {
             if ($settings->getBool('active')
                 && $settings->getStr('cat', false) !== ''
-                && $settings->getStr('cat', false) === $rs->cat_url
+                && $settings->getStr('cat', false) === $rs->strField('cat_url')
             ) {
                 // Ignore discrete category
                 continue;
