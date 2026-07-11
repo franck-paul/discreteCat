@@ -30,12 +30,13 @@ class FrontendBehaviors
         // discreteCat active and a category to exclude
         if ($settings->getBool('active', false)
             && $settings->getStr('cat', false) !== ''
-            && (!isset($params['no_context']) && !isset($params['cat_url']) && !isset($params['cat_id']) && !isset($params['cat_id_not']))
+            && (!isset($params['no_context'])
+                && !isset($params['cat_url'])
+                && !isset($params['cat_id'])
+                && !isset($params['cat_id_not']))
+            && App::url()->isType(['default', 'default-page', 'feed'])
         ) {
-            $url_types = ['default', 'default-page', 'feed'];
-            if (in_array(App::url()->getType(), $url_types)) {
-                $params['cat_url'] = $settings->getStr('cat', false) . ' ?not';
-            }
+            $params['cat_url'] = $settings->getStr('cat', false) . ' ?not';
         }
 
         return '';

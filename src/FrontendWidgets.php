@@ -65,10 +65,10 @@ class FrontendWidgets
             }
 
             $class = '';
-            if ((App::url()->getType() === 'category'
+            if ((App::url()->isType('category')
                     && App::frontend()->context()->categories instanceof MetaRecord
                     && App::frontend()->context()->categories->intField('cat_id') === $rs->intField('cat_id'))
-                || (App::url()->getType() === 'post'
+                || (App::url()->isType('post')
                     && App::frontend()->context()->posts instanceof MetaRecord
                     && App::frontend()->context()->posts->intField('cat_id') === $rs->intField('cat_id'))
             ) {
