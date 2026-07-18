@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 discreteCat module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-24 12:36+0200\n"
+"POT-Creation-Date: 2026-07-18 18:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,34 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/discreteCat/src/Backend.php:29
-#: ../git-plugins/discreteCat/src/Backend.php:41
-#: ../git-plugins/discreteCat/src/Backend.php:51
-#: ../git-plugins/discreteCat/src/Manage.php:101
-#: ../git-plugins/discreteCat/src/Manage.php:106
-msgid "Discrete category"
+#: ../git-plugins/discreteCat/src/Backend.php:30
+#: ../git-plugins/discreteCat/src/Backend.php:47
+#: ../git-plugins/discreteCat/src/Manage.php:110
+msgid "Discrete categories"
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Backend.php:29
-msgid "Exclude a category from Home and RSS/Atom feed"
+#: ../git-plugins/discreteCat/src/Backend.php:31
+msgid "Exclude categories from Home and RSS/Atom feed"
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Manage.php:116
+#: ../git-plugins/discreteCat/src/Manage.php:119
 msgid "No category yet."
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Manage.php:128
-msgid "This category will be excluded from home and it's RSS/Atom feeds only."
+#: ../git-plugins/discreteCat/src/Manage.php:153
+msgid "Category"
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Manage.php:141
-msgid "Activate discrete categorie on this blog"
+#: ../git-plugins/discreteCat/src/Manage.php:158
+msgid "Number of posts"
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Manage.php:146
+#: ../git-plugins/discreteCat/src/Manage.php:174
+msgid "Activate discrete categories on this blog"
+msgstr ""
+
+#: ../git-plugins/discreteCat/src/Manage.php:178
+msgid "The following selected categories will be excluded from home and it's RSS/Atom feeds only."
+msgstr ""
+
+#: ../git-plugins/discreteCat/src/Manage.php:183
 msgid "Save"
 msgstr ""
 
-#: ../git-plugins/discreteCat/src/Widgets.php:29
+#: ../git-plugins/discreteCat/src/Widgets.php:30
 msgid "List of categories (non discrete)"
 msgstr ""

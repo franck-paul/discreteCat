@@ -67,7 +67,7 @@ class Install
 
             // Default state is active for entries content and inactive for comments
             $settings->put('active', false, App::blogWorkspace()::NS_BOOL, 'Active', false, true);
-            $settings->put('cat', '', App::blogWorkspace()::NS_STRING, 'Category to exclude', false, true);
+            $settings->put('cat', '', App::blogWorkspace()::NS_STRING, 'Categories to exclude', false, true);
         } catch (Exception $exception) {
             App::error()->add($exception->getMessage());
         }

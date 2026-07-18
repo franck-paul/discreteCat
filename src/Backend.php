@@ -27,8 +27,8 @@ class Backend
     public static function init(): bool
     {
         // dead but useful code, in order to have translations
-        __('Discrete category');
-        __('Exclude a category from Home and RSS/Atom feed');
+        __('Discrete categories');
+        __('Exclude categories from Home and RSS/Atom feed');
 
         return self::status(My::checkContext(My::BACKEND));
     }
@@ -44,7 +44,7 @@ class Backend
         /* Register favorite */
         App::behavior()->addBehavior('adminDashboardFavoritesV2', static function (Favorites $favs): string {
             $favs->register('sysInfo', [
-                'title'          => __('Discrete category'),
+                'title'          => __('Discrete categories'),
                 'url'            => My::manageUrl(),
                 'menu-icon'      => My::icon(),
                 'dashboard-icon' => My::icon(),

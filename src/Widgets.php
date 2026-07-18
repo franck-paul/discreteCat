@@ -33,6 +33,7 @@ class Widgets
             ->setting('subcatscount', __('Include sub cats in count'), false, 'check')
             ->setting('with_empty', __('Include empty categories'), 0, 'check')
             ->addHomeOnly()
+            ->addNotOnArchive()
             ->addContentOnly()
             ->addClass()
             ->addOffline();

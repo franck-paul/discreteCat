@@ -32,11 +32,14 @@ class FrontendBehaviors
             && $settings->getStr('cat', false) !== ''
             && (!isset($params['no_context'])
                 && !isset($params['cat_url'])
+                && !isset($params['cat_url_not'])
                 && !isset($params['cat_id'])
                 && !isset($params['cat_id_not']))
             && App::url()->isType(['default', 'default-page', 'feed'])
         ) {
-            $params['cat_url'] = $settings->getStr('cat', false) . ' ?not';
+            // Each excluded category URL is separated by a space
+            $params['cat_url']     = explode(' ', (string) $settings->getStr('cat', false));
+            $params['cat_url_not'] = true;
         }
 
         return '';

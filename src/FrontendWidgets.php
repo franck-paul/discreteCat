@@ -39,6 +39,10 @@ class FrontendWidgets
             return '';
         }
 
+        if (!$w->checkNotOnArchive(App::url()->getType())) {
+            return '';
+        }
+
         $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$w->get('with_empty')]);
         if ($rs->isEmpty()) {
             return '';
@@ -47,6 +51,7 @@ class FrontendWidgets
         $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
 
         $settings = My::settings();
+        $cat_urls = explode(' ', (string) $settings->getStr('cat', false));
 
         $cat_level = $rs->intField('level');
         if ($cat_level > 0) {
@@ -57,8 +62,7 @@ class FrontendWidgets
         $level     = $cat_level;
         while ($rs->fetch()) {
             if ($settings->getBool('active')
-                && $settings->getStr('cat', false) !== ''
-                && $settings->getStr('cat', false) === $rs->strField('cat_url')
+                && in_array($rs->strField('cat_url'), $cat_urls)
             ) {
                 // Ignore discrete category
                 continue;
