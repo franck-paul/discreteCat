@@ -12,8 +12,8 @@
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
 $this->registerModule(
-    'Discrete category',
-    'Exclude a category from Home and RSS/Atom feed',
+    'Discrete categories',
+    'Exclude some categories from Home and RSS/Atom feed',
     'Franck Paul',
     '6.2',
     [
