@@ -25,30 +25,30 @@ class FrontendWidgets
     /**
      * Render widget
      *
-     * @param      WidgetsElement  $w  The widget
+     * @param      WidgetsElement  $widgetsElement  The widget
      *
      * @return     string Widget content rendered
      */
-    public static function categories(WidgetsElement $w): string
+    public static function categories(WidgetsElement $widgetsElement): string
     {
-        if ($w->offline) {
+        if ($widgetsElement->offline) {
             return '';
         }
 
-        if (!$w->checkHomeOnly(App::url()->getType())) {
+        if (!$widgetsElement->checkHomeOnly(App::url()->getType())) {
             return '';
         }
 
-        if (!$w->checkNotOnArchive(App::url()->getType())) {
+        if (!$widgetsElement->checkNotOnArchive(App::url()->getType())) {
             return '';
         }
 
-        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$w->get('with_empty')]);
+        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$widgetsElement->get('with_empty')]);
         if ($rs->isEmpty()) {
             return '';
         }
 
-        $res = ($w->title ? $w->renderTitle(Html::escapeHTML($w->title)) : '');
+        $res = ($widgetsElement->title ? $widgetsElement->renderTitle(Html::escapeHTML($widgetsElement->title)) : '');
 
         $settings = My::settings();
         $cat_urls = explode(' ', (string) $settings->getStr('cat', false));
@@ -97,7 +97,7 @@ class FrontendWidgets
 
             $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $cat_url) . '">' .
             Html::escapeHTML($cat_title) . '</a>' .
-                ($w->get('postcount') ? ' <span>(' . ($w->get('subcatscount') ? $nb_total : $nb_post) . ')</span>' : '');
+                ($widgetsElement->get('postcount') ? ' <span>(' . ($widgetsElement->get('subcatscount') ? $nb_total : $nb_post) . ')</span>' : '');
 
             $level = $cat_level;
         }
@@ -106,6 +106,6 @@ class FrontendWidgets
             $res .= str_repeat('</li></ul>', -($ref_level - $level));
         }
 
-        return $w->renderDiv((bool) $w->content_only, 'categories ' . $w->class, '', $res);
+        return $widgetsElement->renderDiv((bool) $widgetsElement->content_only, 'categories ' . $widgetsElement->class, '', $res);
     }
 }

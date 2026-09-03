@@ -21,25 +21,25 @@ use Dotclear\App;
 class FrontendBehaviors
 {
     /**
-     * @param      ArrayObject<string, mixed>  $params  The parameters
+     * @param      ArrayObject<string, mixed>  $arrayObject  The parameters
      */
-    public static function coreBlogBeforeGetPosts(ArrayObject $params): string
+    public static function coreBlogBeforeGetPosts(ArrayObject $arrayObject): string
     {
         $settings = My::settings();
 
         // discreteCat active and a category to exclude
         if ($settings->getBool('active', false)
             && $settings->getStr('cat', false) !== ''
-            && (!isset($params['no_context'])
-                && !isset($params['cat_url'])
-                && !isset($params['cat_url_not'])
-                && !isset($params['cat_id'])
-                && !isset($params['cat_id_not']))
+            && (!isset($arrayObject['no_context'])
+                && !isset($arrayObject['cat_url'])
+                && !isset($arrayObject['cat_url_not'])
+                && !isset($arrayObject['cat_id'])
+                && !isset($arrayObject['cat_id_not']))
             && App::url()->isType(['default', 'default-page', 'feed'])
         ) {
             // Each excluded category URL is separated by a space
-            $params['cat_url']     = explode(' ', (string) $settings->getStr('cat', false));
-            $params['cat_url_not'] = true;
+            $arrayObject['cat_url']     = explode(' ', (string) $settings->getStr('cat', false));
+            $arrayObject['cat_url_not'] = true;
         }
 
         return '';

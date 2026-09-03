@@ -46,9 +46,9 @@ class Install
                 }
 
                 // Change settings names (remove discretecat_ prefix in them)
-                $rename = static function (string $name, BlogWorkspaceInterface $settings): void {
-                    if ($settings->settingExists('discretecat_' . $name, true)) {
-                        $settings->rename('discretecat_' . $name, $name);
+                $rename = static function (string $name, BlogWorkspaceInterface $blogWorkspace): void {
+                    if ($blogWorkspace->settingExists('discretecat_' . $name, true)) {
+                        $blogWorkspace->rename('discretecat_' . $name, $name);
                     }
                 };
 

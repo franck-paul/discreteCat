@@ -22,11 +22,11 @@ class Widgets
     /**
      * Initializes the given widgets.
      *
-     * @param      WidgetsStack  $widgets  The widgets
+     * @param      WidgetsStack  $widgetsStack  The widgets
      */
-    public static function initWidgets(WidgetsStack $widgets): string
+    public static function initWidgets(WidgetsStack $widgetsStack): string
     {
-        $widgets
+        $widgetsStack
             ->create('discreteCategories', __('List of categories (non discrete)'), FrontendWidgets::categories(...), null, 'List of categories (non discrete)', My::id())
             ->addTitle(__('Categories'))
             ->setting('postcount', __('With entries counts'), 0, 'check')
