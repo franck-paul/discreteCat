@@ -31,7 +31,7 @@ class FrontendWidgets
      */
     public static function categories(WidgetsElement $widgetsElement): string
     {
-        if ($widgetsElement->offline) {
+        if ($widgetsElement->isOffline()) {
             return '';
         }
 
@@ -48,7 +48,7 @@ class FrontendWidgets
             return '';
         }
 
-        $res = ($widgetsElement->title ? $widgetsElement->renderTitle(Html::escapeHTML($widgetsElement->title)) : '');
+        $res = ($widgetsElement->getTitle() !== '' ? $widgetsElement->renderTitle(Html::escapeHTML($widgetsElement->getTitle())) : '');
 
         $settings = My::settings();
         $cat_urls = explode(' ', (string) $settings->getStr('cat', false));
@@ -106,6 +106,6 @@ class FrontendWidgets
             $res .= str_repeat('</li></ul>', -($ref_level - $level));
         }
 
-        return $widgetsElement->renderDiv((bool) $widgetsElement->content_only, 'categories ' . $widgetsElement->class, '', $res);
+        return $widgetsElement->renderDiv($widgetsElement->getContentOnly(), 'categories ' . $widgetsElement->getClass(), '', $res);
     }
 }
