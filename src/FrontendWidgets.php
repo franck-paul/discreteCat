@@ -51,7 +51,7 @@ class FrontendWidgets
         $res = ($widgetsElement->getTitle() !== '' ? $widgetsElement->renderTitle(Html::escapeHTML($widgetsElement->getTitle())) : '');
 
         $settings = My::settings();
-        $cat_urls = explode(' ', (string) $settings->getStr('cat', false));
+        $cat_urls = explode(' ', $settings->getStr('cat', false));
 
         $cat_level = $rs->intField('level');
         if ($cat_level > 0) {

@@ -38,7 +38,7 @@ class FrontendBehaviors
             && App::url()->isType(['default', 'default-page', 'feed'])
         ) {
             // Each excluded category URL is separated by a space
-            $arrayObject['cat_url']     = explode(' ', (string) $settings->getStr('cat', false));
+            $arrayObject['cat_url']     = explode(' ', $settings->getStr('cat', false));
             $arrayObject['cat_url_not'] = true;
         }
 

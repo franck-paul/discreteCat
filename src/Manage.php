@@ -97,7 +97,7 @@ class Manage
         $active = $settings->getBool('active', false);
         $cat    = $settings->getStr('cat', false);
 
-        $cat_urls = explode(' ', (string) $cat);
+        $cat_urls = explode(' ', $cat);
 
         App::backend()->page()->openModule(
             My::name(),
