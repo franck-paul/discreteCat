@@ -62,7 +62,7 @@ class FrontendWidgets
         $level     = $cat_level;
         while ($rs->fetch()) {
             if ($settings->getBool('active')
-                && in_array($rs->strField('cat_url'), $cat_urls)
+                && in_array($rs->strField('cat_url'), $cat_urls, true)
             ) {
                 // Ignore discrete category
                 continue;

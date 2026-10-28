@@ -131,7 +131,7 @@ class Manage
                         ->items([
                             (new Td())
                                 ->items([
-                                    (new Checkbox(['cat_urls[]'], in_array($cat_url, $cat_urls)))
+                                    (new Checkbox(['cat_urls[]'], in_array($cat_url, $cat_urls, true)))
                                         ->value($cat_url),
                                     (new Text(null, str_repeat('&nbsp;&nbsp;', $cat_level - 1) . Html::escapeHTML($cat_title))),
                                 ]),
