@@ -43,7 +43,7 @@ class FrontendWidgets
             return '';
         }
 
-        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !$widgetsElement->get('with_empty')]);
+        $rs = App::blog()->getCategories(['post_type' => 'post', 'without_empty' => !(bool) $widgetsElement->get('with_empty')]);
         if ($rs->isEmpty()) {
             return '';
         }
@@ -61,7 +61,7 @@ class FrontendWidgets
         $ref_level = $cat_level;
         $level     = $cat_level;
         while ($rs->fetch()) {
-            if ($settings->getBool('active')
+            if ($settings->getBool('active', false)
                 && in_array($rs->strField('cat_url'), $cat_urls, true)
             ) {
                 // Ignore discrete category
@@ -97,7 +97,7 @@ class FrontendWidgets
 
             $res .= '<a href="' . App::blog()->url() . App::url()->getURLFor('category', $cat_url) . '">' .
             Html::escapeHTML($cat_title) . '</a>' .
-                ($widgetsElement->get('postcount') ? ' <span>(' . ($widgetsElement->get('subcatscount') ? $nb_total : $nb_post) . ')</span>' : '');
+                ((bool) $widgetsElement->get('postcount') ? ' <span>(' . ((bool) $widgetsElement->get('subcatscount') ? $nb_total : $nb_post) . ')</span>' : '');
 
             $level = $cat_level;
         }
