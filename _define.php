@@ -18,9 +18,9 @@ if (isset($this) && is_object($this) && method_exists($this, 'registerModule') &
         'Discrete categories',
         'Exclude some categories from Home and RSS/Atom feed',
         'Franck Paul',
-        '7.0',
+        '8.0',
         [
-            'date'        => '2026-08-03T09:51:10+0200',
+            'date'        => '2026-11-08T10:14:29+0100',
             'requires'    => [['core', '2.40']],
             'permissions' => '',
             'type'        => 'plugin',
